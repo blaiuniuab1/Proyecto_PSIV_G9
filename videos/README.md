@@ -10,7 +10,7 @@ Aquest directori conté el codi i els recursos visuals d'un sistema de visió pe
 * **analizador_tactico.py**: Eina interactiva. Reprodueix el partit i permet pausar-lo (tecla 'P') per fer clics al camp i calcular en temps real la distància exacta als defensors o atacants més propers.
 
 ### Vídeos
-* **Clip 001.mp4**: Vídeo original (càmera estàtica "All-22") utilitzat com a entrada per a l'anàlisi.
+* **Clip 001.mp4**: Vídeo original utilitzat com a entrada per a l'anàlisi.
 * **resultado_final.mp4**: Primer vídeo exportat que mostra la detecció bàsica de jugadors i les seves coordenades (X, Y) mapejades sobre la gespa.
 * **resultado_equipos.mp4**: Vídeo exportat avançat on la IA ja classifica correctament i en temps real els jugadors en Equip Fosc i Equip Blanc.
 
