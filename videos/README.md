@@ -1,18 +1,18 @@
-# Anàlisi Tàctica de Futbol Americà amb IA
+# Análisis Táctico de Fútbol Americano con IA
 
-Aquest directori conté el codi i els recursos visuals d'un sistema de visió per computador dissenyat per analitzar partits de futbol americà mitjançant intel·ligència artificial (YOLOv8) i transformacions geomètriques (Homografia).
+Este directorio contiene las herramientas de visión artificial desarrolladas para procesar y analizar jugadas de fútbol americano utilizando YOLOv8 y técnicas de homografía.
 
-## Estructura del Projecte
+## Descripción de los Archivos
 
-### Scripts de Python (Codi Font)
-* **sacar_puntos.py**: Eina de calibratge. Permet fer clic en 4 punts del vídeo per generar la matriu matemàtica que tradueix els píxels de la pantalla a iardes reals en el camp.
-* **nfl_tracker.py**: L'script principal del sistema. Detecta els jugadors fent servir IA, els ubica en iardes i separa automàticament els dos equips mitjançant clustering (K-Means) analitzant els colors dels seus uniformes.
-* **analizador_tactico.py**: Eina interactiva. Reprodueix el partit i permet pausar-lo (tecla 'P') per fer clics al camp i calcular en temps real la distància exacta als defensors o atacants més propers.
+### Scripts de Python
+* **sacar_puntos.py**: Herramienta de calibración para definir los 4 puntos de referencia en el campo y establecer la relación entre píxeles y yardas reales.
+* **nfl_tracker.py**: Script principal que realiza la detección de jugadores, el mapeo de coordenadas en el campo y la clasificación automática de equipos por color.
+* **analizador_tactico.py**: Herramienta de análisis interactivo. Permite pausar el vídeo para medir distancias manualmente con clics y realizar la detección automática del Quarterback y su compañero más cercano pulsando la tecla B.
 
-### Vídeos
-* **Clip 001.mp4**: Vídeo original utilitzat com a entrada per a l'anàlisi.
-* **resultado_final.mp4**: Primer vídeo exportat que mostra la detecció bàsica de jugadors i les seves coordenades (X, Y) mapejades sobre la gespa.
-* **resultado_equipos.mp4**: Vídeo exportat avançat on la IA ja classifica correctament i en temps real els jugadors en Equip Fosc i Equip Blanc.
+### Archivos de Vídeo
+* **Clip 001.mp4**: Vídeo original sin procesar utilizado como fuente de datos.
+* **resultado_final.mp4**: Primera versión del procesamiento con detecciones básicas y visualización de coordenadas.
+* **resultado_equipos.mp4**: Vídeo procesado final con la clasificación de equipos (Oscuro y Blanco) optimizada y estabilizada.
 
-### Carpetes i Altres
-* **fotos_analizador_tactico/**: Carpeta que conté les captures de pantalla generades durant l'ús de l'eina interactiva o proves visuals.
+### Carpetas y Otros
+* **fotos_analizador_tactico/**: Carpeta destinada a almacenar capturas de pantalla y resultados visuales obtenidos durante el análisis.
