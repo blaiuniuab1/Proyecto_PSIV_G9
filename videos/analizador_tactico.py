@@ -176,16 +176,63 @@ def main(video_path):
 
         cv2.imshow("Analizador Interactivo", frame_actual)
         
-        # Lógica de teclado
+# Lógica de teclado
         tecla = cv2.waitKey(30) & 0xFF
         if tecla == ord('q'):
             break
         elif tecla == ord('p'):
-            pausado = not pausado # Cambia entre pausado y reproduciendo
+            pausado = not pausado
             if pausado:
-                print("Vídeo PAUSADO. Haz clic en el campo.")
+                print("Vídeo PAUSADO. Haz clic en el campo o pulsa 'B' para buscar al QB.")
             else:
                 print("Reproduciendo...")
+                
+        # ---------------------------------------------------------
+        # NUEVA FUNCIÓN: BUSCAR AL QB Y SU COMPAÑERO MÁS CERCANO
+        # ---------------------------------------------------------
+        elif tecla == ord('b') or tecla == ord('B'):
+            if not pausado:
+                print("¡Primero pausa el vídeo (P) para usar esta función!")
+            else:
+                frame_actual = frame_limpio.copy() # Limpiamos dibujos anteriores
+                
+                # 1. Filtrar solo a los jugadores del equipo atacante (Oscuro)
+                jugadores_oscuros = [j for j in jugadores_en_pantalla if j[2] == "Oscuro"]
+                
+                if jugadores_oscuros:
+                    # 2. El QB es el jugador con la X más pequeña (el más atrasado a la izquierda)
+                    qb = min(jugadores_oscuros, key=lambda j: j[0])
+                    
+                    # 3. Buscar al compañero más cercano al QB
+                    dist_minima = float('inf')
+                    comp_cercano = None
+                    
+                    for jug in jugadores_oscuros:
+                        if jug != qb: # No calcular la distancia del QB consigo mismo
+                            # Fórmula de Pitágoras (Distancia)
+                            dist = math.sqrt((jug[0] - qb[0])**2 + (jug[1] - qb[1])**2)
+                            if dist < dist_minima:
+                                dist_minima = dist
+                                comp_cercano = jug
+                    
+                    # 4. Dibujar al QB (Círculo Verde)
+                    qb_cx = (qb[3][0] + qb[3][2]) // 2
+                    qb_cy = qb[3][3]
+                    cv2.circle(frame_actual, (qb_cx, qb_cy), 18, (0, 255, 0), -1)
+                    cv2.putText(frame_actual, "QB", (qb[3][0], qb[3][1] - 25), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+                    
+                    # 5. Dibujar al compañero más cercano (Círculo y Línea Rosa)
+                    if comp_cercano:
+                        comp_cx = (comp_cercano[3][0] + comp_cercano[3][2]) // 2
+                        comp_cy = comp_cercano[3][3]
+                        
+                        cv2.circle(frame_actual, (comp_cx, comp_cy), 15, (255, 0, 255), 3)
+                        cv2.line(frame_actual, (qb_cx, qb_cy), (comp_cx, comp_cy), (255, 0, 255), 3)
+                        
+                        texto = f"Mas cercano: {dist_minima:.1f} yds"
+                        cv2.putText(frame_actual, texto, (qb_cx + 20, qb_cy + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 255), 2)
+
+                cv2.imshow("Analizador Interactivo", frame_actual)
 
     cap.release()
     cv2.destroyAllWindows()
