@@ -16,4 +16,3 @@ Aquest directori conté el codi i els recursos visuals d'un sistema de visió pe
 
 ### Carpetes i Altres
 * **fotos_analizador_tactico/**: Carpeta que conté les captures de pantalla generades durant l'ús de l'eina interactiva o proves visuals.
-* **hola**: Arxiu temporal o de prova creat durant la configuració del repositori.
